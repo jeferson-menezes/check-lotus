@@ -1,4 +1,4 @@
-class ListaJogos {
+export class ListaJogos {
 
     constructor() {
 

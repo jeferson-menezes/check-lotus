@@ -1,4 +1,4 @@
-class Concurso {
+export class Concurso {
 
     constructor(dezenas, arrecadacao = "", cidade = "", local = "", numero = "", data = "", valorAcumulado = "", premiacao = {}) {
         this._dezenas = dezenas;

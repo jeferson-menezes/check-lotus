@@ -1,14 +1,16 @@
-class ResultadoService {
+import { HttpService } from "./HttpService.js"
+
+export class ResultadoService {
 
     constructor() {
 
         this._http = new HttpService()
-        this._urlLoto = 'http://confiraloterias.com.br/api0/json.php?loteria=megasena&token=9yNMw5h0K2QTUEC';
+        this._urlLoto = ' https://apiloterias.com.br/app/resultado?loteria=megasena&token=g8itKyyrUsFgG5K';
 
     }
 
     obterResultadoConcurso(concurso) {
-        console.log(concurso);
-       return this._http.get(`${this._urlLoto}&concurso=${concurso}`)
+        return this._http.get(`${this._urlLoto}&concurso=${concurso}`)
     }
+
 }

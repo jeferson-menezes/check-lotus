@@ -1,127 +1,88 @@
 <!DOCTYPE html>
 <html lang="PT-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <title>CheckLotus - Vanilla</title>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Titulo -->
-      <h1 class="text-center">Check Lotus</h1>
 
-      <!-- Alerta -->
-      <div id="view-alert"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <title>CheckLotus - Vanilla</title>
+</head>
 
-      <!-- Loading -->
-      <div id="view-loading"></div>
+<body>
+  <div class="container">
+    <!-- Titulo -->
+    <h1 class="text-center">Check Lotus</h1>
 
-      <!-- Carregar resultado -->
-      <div id="view-resultado" class="justify-content-center">
-        <div class="input-group mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="input-resultado"
-            placeholder="informe uma dezena do resultado e de enter"
-          />
-          <input
-            type="text"
-            class="input-group-append"
-            id="input-concurso"
-            placeholder="informe do concurso"
-            aria-describedby="button"
-          />
-          <div class="input-group-append">
-            <button
-              onclick="megaController.obterResultadoConcurso()"
-              class="btn btn-info"
-              type="button"
-              id="button-resultado"
-            >
-              Obter resultado
-            </button>
-          </div>
-        </div>
+    <!-- Alerta -->
+    <div id="view-alert"></div>
+
+    <!-- Loading -->
+    <div id="view-loading"></div>
+
+    <!-- Carregar resultado -->
+    <div id="view-resultado" class="justify-content-center">
+      <div class="input-group mb-3">
+
+        <input type="text" class="form-control" id="input-resultado"
+          placeholder="informe uma dezena do resultado e de enter" />
+
+        <input type="text" class="form-control" id="input-concurso" placeholder="informe do concurso"
+          aria-describedby="button" />
+
+        <!-- <div class="input-group-append"> -->
+        <button class="btn btn-outline-secondary" type="button" id="button-resultado"> Obter resultado </button>
+        <!-- </div> -->
       </div>
-
-      <!-- Cadastro jogo -->
-      <div class="form-row">
-        <div class="col">
-          <label for="input-jogo">Novo Jogo</label>
-          <input
-            type="tel"
-            class="form-control"
-            id="input-jogo"
-            placeholder="informe uma dezena e aperte enter"
-            max="2"
-          />
-        </div>
-        <div class="col">
-          <label for="dezenas">Quantas dezenas</label>
-          <select class="custom-select" id="select-dezenas">
-            <option value="6">6 dezenas</option>
-            <option value="7">7 dezenas</option>
-            <option value="8">8 dezenas</option>
-            <option value="9">9 dezenas</option>
-            <option value="10">10 dezena</option>
-            <option value="11">11 dezenas</option>
-            <option value="12">12 dezenas</option>
-            <option value="13">13 dezenas</option>
-            <option value="14">14 dezenas</option>
-            <option value="15">15 dezenas</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- tabela -->
-
-      <div id="view-jogos"></div>
     </div>
 
-    <script src="js/app/view/View.js"></script>
-    <script src="js/app/view/AlertaView.js"></script>
-    <script src="js/app/model/Alerta.js"></script>
-    <script src="js/app/service/ProxyFactory.js"></script>
-    <script src="js/app/helpers/Bind.js"></script>
-    <script src="js/app/controller/MegaController.js"></script>
-    <script src="js/app/helpers/MegaHelper.js"></script>
-    <script src="js/app/model/ListaJogos.js"></script>
-    <script src="js/app/view/JogosView.js"></script>
-    <script src="js/app/model/Resultado.js"></script>
-    <script src="js/app/view/ResultadoView.js"></script>
-    <script src="js/app/model/Loading.js"></script>
-    <script src="js/app/view/LoadingView.js"></script>
-    <script src="js/app/service/ResultadoService.js"></script>
-    <script src="js/app/service/HttpService.js"></script>
-    <script src="js/app/model/Concurso.js"></script>
+    <!-- Cadastro jogo -->
+    <div class="row">
 
-    <script>
-      const megaController = new MegaController();
+      <div class="col">
+        <label class="form-label" for="input-jogo">Novo Jogo</label>
+        <input type="tel" class="form-control" id="input-jogo" placeholder="informe uma dezena e aperte enter"
+          max="2" />
+      </div>
 
-      const $inputJogo = document.querySelector("#input-jogo");
-      const $inputResultado = document.querySelector("#input-resultado");
+      <div class="col">
+        <label class="form-label" for="dezenas">Quantas dezenas</label>
+        <select class="form-select form-select" id="select-dezenas">
+          <option value="6">6 dezenas</option>
+          <option value="7">7 dezenas</option>
+          <option value="8">8 dezenas</option>
+          <option value="9">9 dezenas</option>
+          <option value="10">10 dezena</option>
+          <option value="11">11 dezenas</option>
+          <option value="12">12 dezenas</option>
+          <option value="13">13 dezenas</option>
+          <option value="14">14 dezenas</option>
+          <option value="15">15 dezenas</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Importar arquivo de jogos (.csv)</label>
+          <input class="form-control" type="file" accept=".csv" id="arquivo-jogo">
+        </div>
+      </div>
+    </div>
 
-      $inputJogo.addEventListener("keypress", function (event) {
-        if (event.keyCode === 13) {
-          megaController.adicionaValorPalpite($inputJogo.value.trim());
-          $inputJogo.value = "";
-        }
-      });
+    <!-- tabela -->
 
-      $inputResultado.addEventListener("keypress", function (event) {
-        if (event.keyCode === 13) {
-          megaController.adicionaValorResultado($inputResultado.value.trim());
-          $inputResultado.value = "";
-        }
-      });
-    </script>
-  </body>
+    <div id="view-jogos"></div>
+
+    <footer class="p-1">
+      <div class="row justify-content-center">
+        <div class="text-center col-12">
+          © 2020 Copyright - <a target="_blank" href="https://github.com/jeferson-menezes">Jeferson Menezes</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="module" src="js/app/index.js"></script>
+
 </html>

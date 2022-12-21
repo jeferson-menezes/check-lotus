@@ -1,4 +1,4 @@
-class Resultado {
+export class Resultado {
 
     constructor() {
         this._concurso = {};

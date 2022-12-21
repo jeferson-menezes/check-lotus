@@ -1,4 +1,6 @@
-class LoadingView extends View {
+import { View } from "./View.js";
+
+export class LoadingView extends View {
 
     constructor(elemento) {
         super(elemento)

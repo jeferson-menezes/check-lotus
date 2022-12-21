@@ -1,4 +1,4 @@
-class Loading {
+export class Loading {
 
     constructor() {
         this._visible = false

@@ -1,4 +1,7 @@
-class JogosView extends View {
+import { View } from "./View.js";
+import { MegaHelper } from "../helpers/MegaHelper.js";
+
+export class JogosView extends View {
 
     constructor(elemento) {
         super(elemento)
@@ -19,15 +22,15 @@ class JogosView extends View {
             </thead>
 
             <tbody>
-            ${model.jogos.map(j => {
+            ${model.jogos.map((j, i) => {
             const certos = MegaHelper.dezenasAcertadas(j, model.resultado)
             const errados = MegaHelper.dezenasErradas(j, model.resultado)
             return `<tr> 
-                <td><span class="badge badge-pill badge-info">1</span></td>
+                <td><span class="badge text-black-50">${i+1}</span></td>
                 <td>${this._montaGridDezenas(j, "primary")}</td>
                 <td>${this._montaGridDezenas(certos, "success")}</td>
                 <td>${this._montaGridDezenas(errados, "danger")}</td>
-                <td><span class="badge badge-warning"><span class="badge badge-light">${certos.length}</span>${this._premios[certos.length]}</span></td>
+                <td><span class="badge bg-warning"><span class="badge text-bg-secondary">${certos.length}</span>${this._premios[certos.length]}</span></td>
             </tr>`
         }).join('')}
             </tbody>

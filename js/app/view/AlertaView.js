@@ -1,4 +1,6 @@
-class AlertaView extends View {
+import { View } from "./View.js";
+
+export class AlertaView extends View {
 
     constructor(elemento) {
         super(elemento);

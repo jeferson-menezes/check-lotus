@@ -1,4 +1,17 @@
-class MegaController {
+import { Bind } from "../helpers/Bind.js";
+import { MegaHelper } from "../helpers/MegaHelper.js";
+import { Alerta } from "../model/Alerta.js";
+import { Concurso } from "../model/Concurso.js";
+import { ListaJogos } from "../model/ListaJogos.js";
+import { Loading } from "../model/Loading.js";
+import { Resultado } from "../model/Resultado.js";
+import { ResultadoService } from "../service/ResultadoService.js";
+import { AlertaView } from "../view/AlertaView.js";
+import { JogosView } from "../view/JogosView.js";
+import { LoadingView } from "../view/LoadingView.js";
+import { ResultadoView } from "../view/ResultadoView.js";
+
+export class MegaController {
 
     constructor() {
 
@@ -47,6 +60,16 @@ class MegaController {
         }
     }
 
+    adicionarJogos(jogos = []) {
+        console.log(jogos);
+        for (const jogo of jogos) {
+            const dezenas = jogo.split('-').map(e => e.trim())
+            this._jogo.push(...dezenas)
+            this._listaJogos.adiciona(this._jogo)
+            this._jogo = []
+        }
+    }
+
     adicionaValorResultado(dezena) {
         if (MegaHelper.dezenaValida(dezena)) {
             if (this._resultado.includes(dezena.padStart(2, '0'))) {
@@ -71,7 +94,7 @@ class MegaController {
         try {
 
             if (!this.$inputConcurso.value) {
-               throw new Error("Informe o numero do concurso!") 
+                throw new Error("Informe o numero do concurso!")
             }
 
             const res = await this._resultadoService.obterResultadoConcurso(this.$inputConcurso.value)
@@ -80,8 +103,11 @@ class MegaController {
                 throw new Error(res.erro)
             }
 
-            const c = res.concurso
-            const concurso = new Concurso(c.dezenas, c.arrecadacao_total, c.cidade, c.local, c.numero, c.data, c.valor_acumulado, c.premiacao)
+            console.log(res);
+            const concurso = new Concurso(res.dezenas, res.arrecadacao_total,
+                res.local_realizacao, res.local_realizacao, res.numero_concurso
+                , res.data_concurso
+                , res.valor_acumulado, res.premiacao)
             this._setConcurso(concurso)
 
         } catch (error) {

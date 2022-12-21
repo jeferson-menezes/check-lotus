@@ -1,11 +1,15 @@
-class ResultadoView extends View {
+
+import { CurrencyHelper } from '../helpers/CurrencyHelper.js';
+import { DateHelper } from "../helpers/DateHelper.js";
+import { View } from "./View.js";
+
+export class ResultadoView extends View {
 
   constructor(elemento) {
     super(elemento);
   }
 
   template(model) {
-    console.log(model);
     if (!model.concurso.dezenas) {
       return this._statico();
     } else {
@@ -32,7 +36,7 @@ class ResultadoView extends View {
           aria-describedby="button"
         />
         <div class="input-group-append">
-          <button onclick="megaController.obterResultadoConcurso()" class="btn btn-info" type="button" id="button-resultado">
+          <button class="btn btn-info" type="button" id="button-resultado">
             Obter resultado
           </button>
         </div>
@@ -50,11 +54,24 @@ class ResultadoView extends View {
     <div class="mx-auto"  style="width: 800px">
         <ul class="list-group list-group-horizontal">
             <li class="list-group-item"><strong>Concurso</strong><br>${concurso.numero}</li>
-            <li class="list-group-item"><strong>Data</strong><br> ${concurso.data}</li>
+            <li class="list-group-item"><strong>Data</strong><br> ${DateHelper.toBr(concurso.data)}</li>
             <li class="list-group-item"><strong>Cidade</strong><br> ${concurso.cidade}</li>
-            <li class="list-group-item"><strong>Arecadação</strong><br> ${concurso.arrecadacaoTotal}</li>
-            <li class="list-group-item"><strong>Acumulado</strong><br> ${concurso.valorAcumulado}</li>
-            <li class="list-group-item"><strong>Sena</strong><br> ${concurso.premiacao.sena.ganhadores}</li>
+            <li class="list-group-item"><strong>Arecadação</strong><br> ${CurrencyHelper.toReal(concurso.arrecadacaoTotal)}</li>
+            <li class="list-group-item"><strong>Acumulado</strong><br> ${CurrencyHelper.toReal(concurso.valorAcumulado)}</li>
+            <li class="list-group-item"><strong>Premiação</strong><br> 
+
+            <ol class="list-group list-group-numbered">
+
+            ${concurso.premiacao.map(e => `
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold"> <strong>${e.nome}</strong></div>
+      ${e.quantidade_ganhadores} Ganhadores
+    </div>
+    <span class="badge bg-primary rounded-pill">${CurrencyHelper.toReal(e.valor_total)}</span>
+            `).join('')}
+            </li>
+            </li>
         </ul>
     </div>
     ${this._simples(concurso.dezenas)}

@@ -1,4 +1,4 @@
-class Alerta {
+export class Alerta {
     constructor(texto, tipo) {
 
         this._texto = texto || '';
