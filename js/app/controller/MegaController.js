@@ -16,6 +16,7 @@ export class MegaController {
     constructor() {
 
         const $ = document.querySelector.bind(document);
+        
         this._jogo = [];
         this._resultado = [];
         this._alerta = new Bind(
@@ -61,7 +62,7 @@ export class MegaController {
     }
 
     adicionarJogos(jogos = []) {
-        console.log(jogos);
+
         for (const jogo of jogos) {
             const dezenas = jogo.split('-').map(e => e.trim())
             this._jogo.push(...dezenas)
@@ -103,7 +104,6 @@ export class MegaController {
                 throw new Error(res.erro)
             }
 
-            console.log(res);
             const concurso = new Concurso(res.dezenas, res.arrecadacao_total,
                 res.local_realizacao, res.local_realizacao, res.numero_concurso
                 , res.data_concurso
@@ -116,7 +116,6 @@ export class MegaController {
         } finally {
             this._loading.hide();
         }
-
     }
 
     _showAlert(texto, tipo) {

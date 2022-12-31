@@ -58,24 +58,27 @@ export class ResultadoView extends View {
             <li class="list-group-item"><strong>Cidade</strong><br> ${concurso.cidade}</li>
             <li class="list-group-item"><strong>Arecadação</strong><br> ${CurrencyHelper.toReal(concurso.arrecadacaoTotal)}</li>
             <li class="list-group-item"><strong>Acumulado</strong><br> ${CurrencyHelper.toReal(concurso.valorAcumulado)}</li>
-            <li class="list-group-item"><strong>Premiação</strong><br> 
-
-            <ol class="list-group list-group-numbered">
-
-            ${concurso.premiacao.map(e => `
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold"> <strong>${e.nome}</strong></div>
-      ${e.quantidade_ganhadores} Ganhadores
-    </div>
-    <span class="badge bg-primary rounded-pill">${CurrencyHelper.toReal(e.valor_total)}</span>
-            `).join('')}
-            </li>
-            </li>
+            <li class="list-group-item"><strong>Premiação</strong><br> ${this._listaPremiacao(concurso.premiacao)}</li>
         </ul>
     </div>
     ${this._simples(concurso.dezenas)}
     `
+  }
+
+  _listaPremiacao(premiacao){
+      return `
+      <ol class="list-group list-group-numbered">
+      ${premiacao.map(e=> `
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold"> <strong>${e.nome}</strong></div>
+          ${e.quantidade_ganhadores} Ganhadores
+        </div>
+        <span class="badge bg-primary rounded-pill">${CurrencyHelper.toReal(e.valor_total)}</span>
+      </li>
+      `).join('')}
+      </ol>
+      `
   }
 
 }
